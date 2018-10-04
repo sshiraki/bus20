@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MapKit
 
 class ViewController: UIViewController {
     struct ScheduledRider {
@@ -19,6 +20,7 @@ class ViewController: UIViewController {
     }
     
     @IBOutlet var viewMain:UIView!
+    @IBOutlet weak var viewMap: MKMapView!
     @IBOutlet var label:UILabel!
     let graph = Graph(w: Metrics.graphWidth, h: Metrics.graphHeight, unit: Metrics.edgeLength)
     //let graph = try! Graph()

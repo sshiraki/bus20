@@ -20,7 +20,18 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P9k-2a-iWR">
                                 <rect key="frame" x="0.0" y="20" width="375" height="422"/>
+                                <subviews>
+                                    <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="HiN-3q-NfY">
+                                        <rect key="frame" x="0.0" y="-11" width="375" height="433"/>
+                                    </mapView>
+                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="HiN-3q-NfY" firstAttribute="leading" secondItem="P9k-2a-iWR" secondAttribute="leading" constant="18" id="L9Q-6m-1ac"/>
+                                    <constraint firstAttribute="bottom" secondItem="HiN-3q-NfY" secondAttribute="bottom" constant="-28" id="U0p-7M-PVj"/>
+                                    <constraint firstAttribute="trailing" secondItem="HiN-3q-NfY" secondAttribute="trailing" constant="-18" id="fsh-dk-lzq"/>
+                                    <constraint firstItem="HiN-3q-NfY" firstAttribute="top" secondItem="P9k-2a-iWR" secondAttribute="top" constant="17" id="vBO-qe-uwO"/>
+                                </constraints>
                             </view>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pGJ-Ox-ZwA">
                                 <rect key="frame" x="0.0" y="623" width="375" height="44"/>
@@ -92,6 +103,7 @@
                     <connections>
                         <outlet property="label" destination="dPi-0F-R8u" id="QYC-tG-eQp"/>
                         <outlet property="viewMain" destination="P9k-2a-iWR" id="0da-d5-nuC"/>
+                        <outlet property="viewMap" destination="HiN-3q-NfY" id="Csk-ds-Lo2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
