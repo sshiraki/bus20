@@ -10,7 +10,7 @@ import UIKit
 
 struct Graph {
     static var verbose = false
-    private let nodes:[Node]
+    private var nodes:[Node]
     private let routes:[[Route]] // shortest routes among all nodes
     
     init(w:Int, h:Int, unit:CGFloat) {
@@ -75,6 +75,9 @@ struct Graph {
             }
             return Node(location:CGPoint(x:x , y:y ), edges: edges)
         }
+        
+        self.nodes = Graph.updateLength(nodes: self.nodes)
+        
         self.routes = Graph.allShortestRoute(nodes: self.nodes)
     }
 
