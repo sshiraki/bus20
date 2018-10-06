@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, MKMapViewDelegate {
     struct ScheduledRider {
         let rider:Rider
         let rideTime:CGFloat
@@ -20,7 +20,6 @@ class ViewController: UIViewController {
     }
     
     @IBOutlet var viewMain:UIView!
-    @IBOutlet weak var viewMap: MKMapView!
     @IBOutlet var label:UILabel!
     //let graph = Graph(w: Metrics.graphWidth, h: Metrics.graphHeight, unit: Metrics.edgeLength)
     let graph = try! Graph()
@@ -42,16 +41,33 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let frame = view.frame
-        let mapView = UIImageView(frame: frame)
+        //let mapView = UIImageView(frame: frame)
+        let mapView = MKMapView(frame: frame)
+        mapView.delegate = self
         scale = min(frame.size.width / CGFloat(Metrics.graphWidth + 1),
                         frame.size.height / CGFloat(Metrics.graphHeight+1)) / Metrics.edgeLength
         UIGraphicsBeginImageContextWithOptions(frame.size, true, 0.0)
         defer { UIGraphicsEndImageContext() }
         
+        //地図にピンを立てる。
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = CLLocationCoordinate2DMake(Metricsmk.centerx, Metricsmk.centery)
+        mapView.addAnnotation(annotation)
+        
         let ctx = UIGraphicsGetCurrentContext()!
         graph.render(ctx:ctx, frame: frame, scale:scale)
         print(graph.json);
-        mapView.image = UIGraphicsGetImageFromCurrentImageContext()
+        //mapView.image = UIGraphicsGetImageFromCurrentImageContext()
+
+        //中心座標
+        let center = CLLocationCoordinate2DMake(Metricsmk.centerx, Metricsmk.centery)
+        
+        //表示範囲
+        let span = MKCoordinateSpan(latitudeDelta: Metricsmk.defaultspan, longitudeDelta: Metricsmk.defaultspan)
+        
+        //中心座標と表示範囲をマップに登録する。
+        let region = MKCoordinateRegion(center: center, span: span)
+        mapView.setRegion(region, animated:true)
 
         viewMain.addSubview(mapView)
 
@@ -230,6 +246,23 @@ class ViewController: UIViewController {
         }
         return ret;
         
+    }
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        if annotation is MKUserLocation {
+            return nil
+        }
+        
+        let reuseId = "pin"
+        var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKMarkerAnnotationView
+        if pinView == nil {
+            pinView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+        }
+        else {
+            pinView?.annotation = annotation
+        }
+        
+        return pinView
     }
 }
 

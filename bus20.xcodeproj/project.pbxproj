@@ -31,7 +31,6 @@
 		74BE312621626C70003DEDFC /* bus20icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 74BE312521626C70003DEDFC /* bus20icon.png */; };
 		9B53D78F2166558100152004 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B53D78E2166558100152004 /* MapKit.framework */; };
 		9B53D79121668CC800152004 /* Metricsmk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B53D79021668CC800152004 /* Metricsmk.swift */; };
-		9B53D7932166909100152004 /* geo.metal in Sources */ = {isa = PBXBuildFile; fileRef = 9B53D7922166909100152004 /* geo.metal */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,7 +62,6 @@
 		74BE312521626C70003DEDFC /* bus20icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bus20icon.png; path = bus20/Assets.xcassets/AppIcon.appiconset/bus20icon.png; sourceTree = SOURCE_ROOT; };
 		9B53D78E2166558100152004 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		9B53D79021668CC800152004 /* Metricsmk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Metricsmk.swift; sourceTree = "<group>"; };
-		9B53D7922166909100152004 /* geo.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = geo.metal; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,7 +104,6 @@
 				74840FCB2151BA5500C84BC8 /* PropertyViewController.swift */,
 				7409A40C21347232007041B0 /* Main.storyboard */,
 				0DE36EAD21558736004850C6 /* map.json */,
-				9B53D7922166909100152004 /* geo.metal */,
 				7409A40F21347232007041B0 /* Assets.xcassets */,
 				7409A41121347232007041B0 /* LaunchScreen.storyboard */,
 				7409A41421347232007041B0 /* Info.plist */,
@@ -236,7 +233,6 @@
 				7424C0892135B46A00092E37 /* Shuttle.swift in Sources */,
 				74424DB82139A79E003A4E82 /* Random.swift in Sources */,
 				7424C0832135B33800092E37 /* Route.swift in Sources */,
-				9B53D7932166909100152004 /* geo.metal in Sources */,
 				7409A40B21347232007041B0 /* ViewController.swift in Sources */,
 				74840FCA2146D5E400C84BC8 /* Evaluator.swift in Sources */,
 				74840FC5213CF3BF00C84BC8 /* RoutePlan.swift in Sources */,
