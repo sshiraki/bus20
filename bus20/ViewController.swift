@@ -52,6 +52,7 @@ class ViewController: UIViewController, MKMapViewDelegate {
 
         //let ctx = UIGraphicsGetCurrentContext()!
         //graph.render(ctx:ctx, frame: frame, scale:scale)
+        graph.convertLocation(view: mapView)
         graph.render(view:mapView, frame: frame, scale:scale)
         
         print(graph.json);
