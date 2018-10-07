@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MapKit
 
 struct Graph {
     static var verbose = false
@@ -69,13 +70,16 @@ struct Graph {
                 return Edge(from:from , to:to  , length:length )
             }
             guard let location = node["location"] as? [String:Any],
+                  //let x = location["x"] as? CGFloat,
                   let x = location["x"] as? CGFloat,
+                  //let y = location["y"] as? CGFloat else {
                   let y = location["y"] as? CGFloat else {
                 throw GraphError.invalidJsonError
             }
             return Node(location:CGPoint(x:x , y:y ), edges: edges)
         }
         
+        // Nodes Update
         self.nodes = Graph.updateLength(nodes: self.nodes)
         
         self.routes = Graph.allShortestRoute(nodes: self.nodes)
@@ -131,6 +135,12 @@ struct Graph {
         }
     }
 
+    func render(view:MKMapView, frame:CGRect, scale:CGFloat) {
+        for node in nodes {
+            node.render(view:view, graph:self)
+        }
+    }
+    
     var dictionary:[String:Any]  {
         return [
             "nodes": self.nodes.map { $0.dictionary}
@@ -158,6 +168,19 @@ struct Graph {
         return route
     }
 
+    //　CLLocationCoordinate -> CGPoint
+    mutating func convertLocation(view:MKMapView) {
+        self.nodes = self.nodes.map({ (node) -> Node in
+            // 緯度経度 CLLocationCoordinate
+            let mapx = CLLocationDegrees(node.location.x)
+            let mapy = CLLocationDegrees(node.location.y)
+            let mappoint = CLLocationCoordinate2DMake (mapx, mapy)
+            // 座標変換 to CGPoint
+            let viewpoint = view.convert(mappoint, toPointTo: view)
+            return Node(location: viewpoint, edges: node.edges)
+        })
+    }
+    
     private static func shortest(nodes:[Node], start:Int, end:Int) -> Route {
         var nodes = nodes
         nodes[start] = Node(node:nodes[start], type:.start)

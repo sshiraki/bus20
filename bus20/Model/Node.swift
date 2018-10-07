@@ -7,6 +7,7 @@
 //
 
 import CoreGraphics
+import MapKit
 
 // A Node represents a location where shuttles can pick up or drop riders
 struct Node {
@@ -17,6 +18,7 @@ struct Node {
         case used
     }
     
+    //let location:CGPoint // The location
     let location:CGPoint // The location
     let edges:[Edge]     // Edges started from this node (one direction)
     let type:NodeType    // Node type. Used only when we are searching a shortest route
@@ -51,6 +53,18 @@ struct Node {
         ctx.drawPath(using: .stroke)
     }
 
+    func render(view:MKMapView, graph:Graph) {
+        //地図にピンを立てる。
+        let an = MKPointAnnotation()
+        let co = view.convert(location, toCoordinateFrom: view)
+        an.coordinate = CLLocationCoordinate2DMake(co.latitude, co.longitude)
+        view.addAnnotation(an)
+        
+        for edge in edges {
+            edge.addPath(view: view, graph: graph)
+        }
+    }
+    
     var dictionary:[String:Any] {
         return [
           "location": [

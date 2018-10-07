@@ -29,6 +29,7 @@
 		74BE3120216036A3003DEDFC /* playone.png in Resources */ = {isa = PBXBuildFile; fileRef = 74BE311F216036A3003DEDFC /* playone.png */; };
 		74BE312421609A6B003DEDFC /* OwnerRenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BE312321609A6B003DEDFC /* OwnerRenderView.swift */; };
 		74BE312621626C70003DEDFC /* bus20icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 74BE312521626C70003DEDFC /* bus20icon.png */; };
+		9B32ACD6216A5D57007F836C /* busstop.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B32ACD5216A5D57007F836C /* busstop.png */; };
 		9B53D78F2166558100152004 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B53D78E2166558100152004 /* MapKit.framework */; };
 		9B53D79121668CC800152004 /* Metricsmk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B53D79021668CC800152004 /* Metricsmk.swift */; };
 /* End PBXBuildFile section */
@@ -60,6 +61,7 @@
 		74BE311F216036A3003DEDFC /* playone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playone.png; sourceTree = "<group>"; };
 		74BE312321609A6B003DEDFC /* OwnerRenderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnerRenderView.swift; sourceTree = "<group>"; };
 		74BE312521626C70003DEDFC /* bus20icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bus20icon.png; path = bus20/Assets.xcassets/AppIcon.appiconset/bus20icon.png; sourceTree = SOURCE_ROOT; };
+		9B32ACD5216A5D57007F836C /* busstop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = busstop.png; sourceTree = "<group>"; };
 		9B53D78E2166558100152004 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		9B53D79021668CC800152004 /* Metricsmk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Metricsmk.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -134,6 +136,7 @@
 		74840FC1213B407800C84BC8 /* Media */ = {
 			isa = PBXGroup;
 			children = (
+				9B32ACD5216A5D57007F836C /* busstop.png */,
 				74BE312521626C70003DEDFC /* bus20icon.png */,
 				74840FC2213B40CD00C84BC8 /* rider.png */,
 				74BE311D2160369C003DEDFC /* settings.png */,
@@ -211,6 +214,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				74BE311E2160369C003DEDFC /* settings.png in Resources */,
+				9B32ACD6216A5D57007F836C /* busstop.png in Resources */,
 				7409A41321347232007041B0 /* LaunchScreen.storyboard in Resources */,
 				7409A41021347232007041B0 /* Assets.xcassets in Resources */,
 				74BE3120216036A3003DEDFC /* playone.png in Resources */,

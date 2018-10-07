@@ -22,7 +22,7 @@ class ViewController: UIViewController, MKMapViewDelegate {
     @IBOutlet var viewMain:UIView!
     @IBOutlet var label:UILabel!
     //let graph = Graph(w: Metrics.graphWidth, h: Metrics.graphHeight, unit: Metrics.edgeLength)
-    let graph = try! Graph()
+    var graph = try! Graph()
     let labelTime = UILabel(frame: .zero) // to render text
     var routeView:OwnerRenderView!
     var scale = CGFloat(1.0)
@@ -44,30 +44,26 @@ class ViewController: UIViewController, MKMapViewDelegate {
         //let mapView = UIImageView(frame: frame)
         let mapView = MKMapView(frame: frame)
         mapView.delegate = self
+        
         scale = min(frame.size.width / CGFloat(Metrics.graphWidth + 1),
                         frame.size.height / CGFloat(Metrics.graphHeight+1)) / Metrics.edgeLength
         UIGraphicsBeginImageContextWithOptions(frame.size, true, 0.0)
         defer { UIGraphicsEndImageContext() }
+
+        //let ctx = UIGraphicsGetCurrentContext()!
+        //graph.render(ctx:ctx, frame: frame, scale:scale)
+        graph.render(view:mapView, frame: frame, scale:scale)
         
-        //地図にピンを立てる。
-        let annotation = MKPointAnnotation()
-        annotation.coordinate = CLLocationCoordinate2DMake(Metricsmk.centerx, Metricsmk.centery)
-        mapView.addAnnotation(annotation)
-        
-        let ctx = UIGraphicsGetCurrentContext()!
-        graph.render(ctx:ctx, frame: frame, scale:scale)
         print(graph.json);
         //mapView.image = UIGraphicsGetImageFromCurrentImageContext()
-
-        //中心座標
+        
+        // 中心座標 Center Location
         let center = CLLocationCoordinate2DMake(Metricsmk.centerx, Metricsmk.centery)
-        
-        //表示範囲
+        // 表示範囲 Coordinate Span
         let span = MKCoordinateSpan(latitudeDelta: Metricsmk.defaultspan, longitudeDelta: Metricsmk.defaultspan)
-        
-        //中心座標と表示範囲をマップに登録する。
+        // 中心座標と表示範囲をマップに登録する。
         let region = MKCoordinateRegion(center: center, span: span)
-        mapView.setRegion(region, animated:true)
+        mapView.setRegion(region, animated:false)
 
         viewMain.addSubview(mapView)
 
@@ -248,6 +244,7 @@ class ViewController: UIViewController, MKMapViewDelegate {
         
     }
     
+    // ピン描画前の呼び出しメソッド
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         if annotation is MKUserLocation {
             return nil
@@ -257,12 +254,29 @@ class ViewController: UIViewController, MKMapViewDelegate {
         var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKMarkerAnnotationView
         if pinView == nil {
             pinView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
-        }
-        else {
+        } else {
             pinView?.annotation = annotation
         }
         
+//        pinView?.image = UIImage.init(named: "../media/busstop.png") // 画像名
+//        pinView?.annotation = annotation
+//        pinView?.canShowCallout = true  // タップで吹き出しを表示
         return pinView
+    }
+    
+    // 描画前の呼び出しメソッド
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        //円と多角形の場合でインスタンスのクラスを分ける。
+        let renderer:MKOverlayPathRenderer
+        if overlay is MKCircle {
+            renderer = MKCircleRenderer(overlay:overlay)
+        } else if overlay is MKPolyline {
+            renderer = MKPolylineRenderer(overlay:overlay)
+        } else {
+            renderer = MKPolygonRenderer(overlay:overlay)
+        }
+        
+        return renderer
     }
 }
 
@@ -273,10 +287,12 @@ extension ViewController : OwnerRenderViewDelegate {
         labelTime.text = String(format: "%2d:%02d", Int(timeUpdated / 60), Int(timeUpdated) % 60)
         labelTime.drawText(in: CGRect(x: 2, y: 2, width: 100, height: 20))
         shuttles.forEach() {
+            //$0.render(ctx: ctx, graph: graph, scale: scale, time:timeUpdated)
             $0.render(ctx: ctx, graph: graph, scale: scale, time:timeUpdated)
         }
         let activeRiders = riders.filter({ $0.state != .done })
         activeRiders.forEach() {
+            //$0.render(ctx: ctx, graph: graph, scale: scale)
             $0.render(ctx: ctx, graph: graph, scale: scale)
         }
         DispatchQueue.main.async {
