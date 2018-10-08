@@ -38,7 +38,7 @@ struct Edge {
         let cofrom = view.convert(locationFrom, toCoordinateFrom: view)
         let coto = view.convert(locationTo, toCoordinateFrom: view)
         var cofromto:[CLLocationCoordinate2D] = [cofrom, coto]
-        let pl = MKPolyline(coordinates: &cofromto, count: 2)
+        let pl = MKPolyline(coordinates: &cofromto, count: cofromto.count)
         view.addOverlay(pl)
     }
     

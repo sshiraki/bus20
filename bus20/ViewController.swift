@@ -274,6 +274,11 @@ class ViewController: UIViewController, MKMapViewDelegate {
             renderer = MKCircleRenderer(overlay:overlay)
         } else if overlay is MKPolyline {
             renderer = MKPolylineRenderer(overlay:overlay)
+            // 線の太さを指定.
+            renderer.lineWidth = 5
+            // 線の色を指定.
+            renderer.strokeColor = UIColor(red: (0/255.0), green: (203/255.0), blue: (0/255.0), alpha: 1.0)
+
         } else {
             renderer = MKPolygonRenderer(overlay:overlay)
         }
