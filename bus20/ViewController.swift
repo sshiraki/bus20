@@ -255,6 +255,7 @@ class ViewController: UIViewController, MKMapViewDelegate {
         var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKMarkerAnnotationView
         if pinView == nil {
             pinView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+            pinView?.glyphImage = UIImage.init(named: "busstop.png") // 画像名
         } else {
             pinView?.annotation = annotation
         }
