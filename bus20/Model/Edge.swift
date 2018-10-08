@@ -30,16 +30,16 @@ struct Edge {
         ctx.addLine(to: CGPoint(x: locationTo.x * scale, y: locationTo.y * scale))
     }
 
-    // For rendering
+    // for MapKit rendering
     func addPath(view:MKMapView, graph:Graph) {
         let locationFrom = graph.location(at: from)
         let locationTo = graph.location(at: to)
-        // 地図に線を引く。
+        // 経路の始点終点を設定。
         let cofrom = view.convert(locationFrom, toCoordinateFrom: view)
         let coto = view.convert(locationTo, toCoordinateFrom: view)
-        var cofromto:[CLLocationCoordinate2D] = [cofrom, coto]
-        let pl = MKPolyline(coordinates: &cofromto, count: cofromto.count)
-        view.addOverlay(pl)
+        // 地図に経路を表示する。
+        let dr = Direction()
+        dr.addRoute(view: view, userLocation: cofrom, destLocation: coto)
     }
     
     var dictionary:[String:Any] {

@@ -11,6 +11,7 @@ import MapKit
 
 // A Node represents a location where shuttles can pick up or drop riders
 struct Node {
+    static let image = UIImage(named: "busstop.png")!
     enum NodeType {
         case empty
         case start
@@ -54,12 +55,13 @@ struct Node {
     }
 
     func render(view:MKMapView, graph:Graph) {
-        //地図にピンを立てる。
+        // 地図にピンを立てる
         let an = MKPointAnnotation()
         let co = view.convert(location, toCoordinateFrom: view)
         an.coordinate = CLLocationCoordinate2DMake(co.latitude, co.longitude)
+        Metricsmk.image = Node.image
         view.addAnnotation(an)
-        
+        // edge間の線を引く
         for edge in edges {
             edge.addPath(view: view, graph: graph)
         }

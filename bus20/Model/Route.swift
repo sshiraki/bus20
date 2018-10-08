@@ -7,6 +7,7 @@
 //
 
 import CoreGraphics
+import MapKit
 
 // A Route represents a section of trip from one node to another consisting of connected edges.
 struct Route {
@@ -31,6 +32,21 @@ struct Route {
             ctx.addLine(to: CGPoint(x: locationTo.x * scale, y: locationTo.y * scale))
         }
         ctx.drawPath(using: .stroke)
+    }
+
+    // for MapKit
+    func render(view:MKMapView, graph:Graph, scale:CGFloat) {
+        let locationFrom = graph.location(at: edges[0].from)
+        for edge in edges {
+            let locationTo = graph.location(at: edge.to)
+            // 経路の始点終点を設定。
+            let cofrom = view.convert(locationFrom, toCoordinateFrom: view)
+            let coto = view.convert(locationTo, toCoordinateFrom: view)
+            Metricsmk.maproadcolor = UIColor(red: (0/255.0), green: (0/255.0), blue: (255/255.0), alpha: 1.0)
+           // 地図に経路を表示する。
+            let dr = Direction()
+            dr.addRoute(view: view, userLocation: cofrom, destLocation: coto)
+        }
     }
 }
 

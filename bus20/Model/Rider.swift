@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MapKit
 
 enum RiderState {
     case waiting
@@ -60,6 +61,27 @@ class Rider {
         let rc = CGRect(x: location.x * scale + Metrics.riderRadius * (2.5 * CGFloat(offset) - 1), y: location.y * scale - Metrics.riderRadius * 6.0, width: Metrics.riderRadius * 2.0, height: Metrics.riderRadius * 6.0)
         ctx.fillEllipse(in: rc)
         Rider.image.draw(in: rc) // HACK: This code assumes ctx is the current UI Graphics context
+    }
+
+    // for MapKit rendering
+    func render(view:MKMapView, graph:Graph, scale:CGFloat) {
+        let locationTo = graph.location(at: to)
+        // 経路の始点終点を設定。
+        let cofrom = view.convert(location, toCoordinateFrom: view)
+        let coto = view.convert(locationTo, toCoordinateFrom: view)
+        Metricsmk.maproadcolor = UIColor(red: (0/255.0), green: (255/255.0), blue: (0/255.0), alpha: 1.0)
+        // 地図に経路を表示する。
+        let dr = Direction()
+        dr.addRoute(view: view, userLocation: cofrom, destLocation: coto)
+        
+        let colorFill = (state == .none) ? UIColor.black : UIColor(hue: hue, saturation: 1.0, brightness: 0.5, alpha: Metrics.riderAlpha)
+        let colorStroke = (state == .none) ? UIColor.black : UIColor(hue: hue, saturation: 1.0, brightness: 0.5, alpha: Metrics.riderPathAlpha)
+        colorStroke.setStroke()
+        colorFill.setFill()
+        Metricsmk.maproadcolor = UIColor(hue: hue, saturation: 1.0, brightness: 0.5, alpha: Metrics.riderAlpha)
+        //let rc = CGRect(x: location.x * scale + Metrics.riderRadius * (2.5 * CGFloat(offset) - 1), y: location.y * scale - Metrics.riderRadius * 6.0, width: Metrics.riderRadius * 2.0, height: Metrics.riderRadius * 6.0)
+        //Rider.image.draw(in: rc) // HACK: This code assumes ctx is the current UI Graphics context
+        Metricsmk.image = Rider.image
     }
 }
 

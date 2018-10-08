@@ -59,7 +59,7 @@ class ViewController: UIViewController, MKMapViewDelegate {
         //mapView.image = UIGraphicsGetImageFromCurrentImageContext()
         
         // 中心座標 Center Location
-        let center = CLLocationCoordinate2DMake(Metricsmk.centerx, Metricsmk.centery)
+        let center = CLLocationCoordinate2DMake(Metricsmk.centery, Metricsmk.centerx)
         // 表示範囲 Coordinate Span
         let span = MKCoordinateSpan(latitudeDelta: Metricsmk.defaultspan, longitudeDelta: Metricsmk.defaultspan)
         // 中心座標と表示範囲をマップに登録する。
@@ -255,14 +255,12 @@ class ViewController: UIViewController, MKMapViewDelegate {
         var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKMarkerAnnotationView
         if pinView == nil {
             pinView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
-            pinView?.glyphImage = UIImage.init(named: "busstop.png") // 画像名
+            pinView?.glyphImage = Metricsmk.image
         } else {
             pinView?.annotation = annotation
         }
         
-//        pinView?.image = UIImage.init(named: "../media/busstop.png") // 画像名
-//        pinView?.annotation = annotation
-//        pinView?.canShowCallout = true  // タップで吹き出しを表示
+        pinView?.canShowCallout = true  // タップで吹き出しを表示
         return pinView
     }
     
@@ -275,14 +273,12 @@ class ViewController: UIViewController, MKMapViewDelegate {
         } else if overlay is MKPolyline {
             renderer = MKPolylineRenderer(overlay:overlay)
             // 線の太さを指定.
-            renderer.lineWidth = 5
+            renderer.lineWidth = Metricsmk.maproadwidth
             // 線の色を指定.
-            renderer.strokeColor = UIColor(red: (0/255.0), green: (203/255.0), blue: (0/255.0), alpha: 1.0)
-
+            renderer.strokeColor = Metricsmk.maproadcolor
         } else {
             renderer = MKPolygonRenderer(overlay:overlay)
         }
-        
         return renderer
     }
 }

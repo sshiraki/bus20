@@ -79,9 +79,8 @@ struct Graph {
             return Node(location:CGPoint(x:x , y:y ), edges: edges)
         }
         
-        // Nodes Update
+        // calculate length JSONファイルではlengthを指定しなくても良い
         self.nodes = Graph.updateLength(nodes: self.nodes)
-        
         self.routes = Graph.allShortestRoute(nodes: self.nodes)
     }
 
@@ -135,7 +134,9 @@ struct Graph {
         }
     }
 
+    // for MapKit
     func render(view:MKMapView, frame:CGRect, scale:CGFloat) {
+        Metricsmk.maproadcolor = UIColor.lightGray
         for node in nodes {
             node.render(view:view, graph:self)
         }

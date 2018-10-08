@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MapKit
 
 // A Shuttle represents a shuttle bus who can carry multiple riders.
 class Shuttle {
@@ -111,6 +112,26 @@ class Shuttle {
             for route in routes {
                 UIColor(hue: hue, saturation: 1.0, brightness: 1.0, alpha: Metrics.routeAlpha).setStroke()
                 route.render(ctx:ctx, graph:graph, scale:scale)
+            }
+        }
+    }
+    
+    // for MapKit rendering
+    // Renders the shuttle itself, and the scheduled route (only when it has riders)
+    func render(view:MKMapView, graph:Graph, scale:CGFloat, time:CGFloat) {
+        // Render the shuttle
+//        let rc = CGRect(x: location.x * scale - Metrics.shuttleRadius, y: location.y * scale - Metrics.shuttleRadius, width: Metrics.shuttleRadius * 2, height: Metrics.shuttleRadius * 2)
+        Metricsmk.maproadcolor = UIColor(hue: hue, saturation: 1.0, brightness: 1.0, alpha: Metrics.shuttleAlpha)
+//        ctx.fillEllipse(in: rc)
+        
+        // Render the scheduled routes
+        if riders.count > 0 {
+//            ctx.setLineWidth(Metrics.routeWidth)
+//            ctx.setLineCap(.round)
+//            ctx.setLineJoin(.round)
+            for route in routes {
+                UIColor(hue: hue, saturation: 1.0, brightness: 1.0, alpha: Metrics.routeAlpha).setStroke()
+                route.render(view:view, graph:graph, scale:scale)
             }
         }
     }

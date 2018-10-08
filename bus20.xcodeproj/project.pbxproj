@@ -30,6 +30,7 @@
 		74BE312421609A6B003DEDFC /* OwnerRenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BE312321609A6B003DEDFC /* OwnerRenderView.swift */; };
 		74BE312621626C70003DEDFC /* bus20icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 74BE312521626C70003DEDFC /* bus20icon.png */; };
 		9B32ACD6216A5D57007F836C /* busstop.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B32ACD5216A5D57007F836C /* busstop.png */; };
+		9B32ACD8216B6949007F836C /* DIrection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B32ACD7216B6949007F836C /* DIrection.swift */; };
 		9B53D78F2166558100152004 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B53D78E2166558100152004 /* MapKit.framework */; };
 		9B53D79121668CC800152004 /* Metricsmk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B53D79021668CC800152004 /* Metricsmk.swift */; };
 /* End PBXBuildFile section */
@@ -62,6 +63,7 @@
 		74BE312321609A6B003DEDFC /* OwnerRenderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnerRenderView.swift; sourceTree = "<group>"; };
 		74BE312521626C70003DEDFC /* bus20icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bus20icon.png; path = bus20/Assets.xcassets/AppIcon.appiconset/bus20icon.png; sourceTree = SOURCE_ROOT; };
 		9B32ACD5216A5D57007F836C /* busstop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = busstop.png; sourceTree = "<group>"; };
+		9B32ACD7216B6949007F836C /* DIrection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIrection.swift; sourceTree = "<group>"; };
 		9B53D78E2166558100152004 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		9B53D79021668CC800152004 /* Metricsmk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Metricsmk.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -129,6 +131,7 @@
 				74840FC92146D5E400C84BC8 /* Evaluator.swift */,
 				7424C0862135B3B200092E37 /* Node.swift */,
 				74840FC4213CF3BF00C84BC8 /* RoutePlan.swift */,
+				9B32ACD7216B6949007F836C /* DIrection.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -243,6 +246,7 @@
 				7489E3F52137B0F1002F5F23 /* Metrics.swift in Sources */,
 				74A8DB0C2135D91900DA03D0 /* Rider.swift in Sources */,
 				9B53D79121668CC800152004 /* Metricsmk.swift in Sources */,
+				9B32ACD8216B6949007F836C /* DIrection.swift in Sources */,
 				74840FCC2151BA5500C84BC8 /* PropertyViewController.swift in Sources */,
 				7424C0872135B3B200092E37 /* Node.swift in Sources */,
 				7424C0852135B38500092E37 /* Edge.swift in Sources */,
